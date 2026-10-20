@@ -96,6 +96,9 @@ def sample_exponential(theta, r):
 * **Imputed Full Library Mean (全集平均，包含置零项)**:
   $$\text{Mean}_{\text{full}} = \frac{1}{N} \sum_{i=1}^{N} x_i \cdot 1[x_i \ge t]$$
   *Conceptual Difference*: Implicitly imputes the count of every failing cell ($x_i < t$) to 0 (将未通过质控的细胞表达量强行设为 0).
+Indicator Function: $\boldsymbol{1}[\text{condition}]=1$ if true, 0 if false.
+Filtered Mean (仅计算通过质控细胞的均值): $$\text{Mean}_{\text{passed}} = \frac{\sum_{i=1}^{N} x_i \cdot \boldsymbol{1}[x_i \ge t]}{\sum_{i=1}^{N} \boldsymbol{1}[x_i \ge t]} = \frac{\text{total}}{\text{n_kept}}$$
+Imputed Full Library Mean (全集平均，包含置零项): $$\text{Mean}_{\text{full}} = \frac{1}{N} \sum_{i=1}^{N} x_i \cdot \boldsymbol{1}[x_i \ge t]$$ Conceptual Difference: Implicitly imputes the count of every failing cell ($x_i<t$) to 0 (将未通过质控的细胞表达量强行设为 0).
 
 ```python
 def summarise_qc(counts, t):
